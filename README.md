@@ -1,2 +1,3 @@
-# quint-mutex
-Expressing some locks in Quint
+# Quint Mutex
+
+Verifying some classic locks in Quint, translating from TLA+
