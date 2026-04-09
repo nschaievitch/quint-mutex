@@ -107,7 +107,7 @@ module Peterson {
     }
 
     // we generalize to n processes, but it would be easier to write not(pc.get(0) == E and pc.get(1) == E)
-    val mutex = Set(processes.filter(p => pc.get(p) == E)).size() <= 1 // this verifies!
+    val mutex = processes.filter(p => pc.get(p) == E).size() <= 1 // this verifies!
 
     // for the inductive invariant:
     // not sure how idiomatic this is, translating directly from TLA
