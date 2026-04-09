@@ -33,8 +33,8 @@ module Peterson {
     action ExecT1(p: Process): bool = {
         all {
             pc.get(p) == T1,
-            interested' = interested.setBy(p, pp => true),
-            pc' = pc.setBy(p, pp => T2),
+            interested' = interested.set(p, true),
+            pc' = pc.set(p, T2),
             turn' = turn
         }
     }
@@ -43,7 +43,7 @@ module Peterson {
         all {
             pc.get(p) == T2,
             turn' = other(p),
-            pc' = pc.setBy(p, pp => T3A),
+            pc' = pc.set(p, T3A),
             interested' = interested
         }
     }
@@ -53,9 +53,9 @@ module Peterson {
             pc.get(p) == T3A,
 
             if (turn == p) {
-                pc' = pc.setBy(p, pp => E)
+                pc' = pc.set(p, E)
             } else {
-                pc' = pc.setBy(p, pp => T3B)
+                pc' = pc.set(p, T3B)
             },
 
             interested' = interested,
@@ -68,9 +68,9 @@ module Peterson {
             pc.get(p) == T3B,
 
             if (not(interested.get(other(p)))) {
-                pc' = pc.setBy(p, pp => E)
+                pc' = pc.set(p, E)
             } else {
-                pc' = pc.setBy(p, pp => T3A)
+                pc' = pc.set(p, T3A)
             },
 
             interested' = interested,
@@ -81,8 +81,8 @@ module Peterson {
     action ExecE(p: Process): bool = {
         all {
             pc.get(p) == E,
-            interested' = interested.setBy(p, pp => false),
-            pc' = pc.setBy(p, pp => T1),
+            interested' = interested.set(p, false),
+            pc' = pc.set(p, T1),
             turn' = turn
         }
     }
